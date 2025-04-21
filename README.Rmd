@@ -57,7 +57,7 @@ lf$rotated_plot
 
 ## Citation
 
-Simon Freyaldenhoven."Identification Through Sparsity in Factor Models: the l1-rotation criterion" [Working Paper](https://simonfreyaldenhoven.github.io/papers/factor_rotation.pdf),
+Simon Freyaldenhoven. "Identification Through Sparsity in Factor Models: the l1-rotation criterion." [Working Paper](https://simonfreyaldenhoven.github.io/papers/factor_rotation.pdf),
 February 2025.
 
 Simon Freyaldenhoven, Ryan Kobler. "`l1rotation` package." Code and data repository at https://github.com/SimonFreyaldenhoven/l1rotation, March 2025.
