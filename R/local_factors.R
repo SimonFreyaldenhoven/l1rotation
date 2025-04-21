@@ -100,7 +100,9 @@ plot_loading_matrix <- function(data, xlab = "", ylab = "", title = ""){
     ggplot2::theme_minimal() +
     ggplot2::theme(
       axis.ticks = ggplot2::element_blank(),
-      panel.grid = ggplot2::element_blank()
+      panel.grid = ggplot2::element_blank(),
+      panel.background = ggplot2::element_rect(fill = "white", color = "white"),
+      plot.background = ggplot2::element_rect(fill = "white", color = "white")
     )
 }
 
@@ -119,7 +121,9 @@ plot_small_loadings <- function(result, r, xlab = "k", ylab = "", title = ""){
     ggplot2::labs(x = xlab, y = ylab, title = title) +
     ggplot2::xlim(c(1, r)) +
     ggplot2::theme_minimal() +
-    ggplot2::theme(legend.position = "none")
+    ggplot2::theme(legend.position = "none",
+                   panel.background = ggplot2::element_rect(fill = "white", color = "white"),
+                   plot.background = ggplot2::element_rect(fill = "white", color = "white"))
 }
 
 
