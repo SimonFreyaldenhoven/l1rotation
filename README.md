@@ -41,7 +41,7 @@ set.seed(916)
 lf <- local_factors(X = example_data, r = 2)
 
 # Rerun with parallel processing
-lf_lambdas <- find_local_factors(X = example_data, r = 2, parallel = TRUE, n_cores = 10)
+lf_lambdas <- local_factors(X = example_data, r = 2, parallel = TRUE, n_cores = 10)
 
 # Visualize Principal Component estimate of the loadings
 lf$pc_plot
@@ -59,8 +59,8 @@ lf$rotated_plot
 
 ## Citation
 
-Simon Freyaldenhoven.”Identification Through Sparsity in Factor Models:
-the l1-rotation criterion” [Working
+Simon Freyaldenhoven. “Identification Through Sparsity in Factor Models:
+the l1-rotation criterion.” [Working
 Paper](https://simonfreyaldenhoven.github.io/papers/factor_rotation.pdf),
 February 2025.
 

@@ -46,7 +46,7 @@ set.seed(916)
 lf <- local_factors(X = example_data, r = 2)
 
 # Rerun with parallel processing
-lf_lambdas <- find_local_factors(X = example_data, r = 2, parallel = TRUE, n_cores = 10)
+lf_lambdas <- local_factors(X = example_data, r = 2, parallel = TRUE, n_cores = 10)
 
 # Visualize Principal Component estimate of the loadings
 lf$pc_plot
