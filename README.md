@@ -9,10 +9,9 @@ downloads](https://cranlogs.r-pkg.org/badges/grand-total/l1rotation)](https://r-
 
 ## Overview
 
-The **l1rotation** package implements the l1-rotation rotation criterion
+The `l1rotation` package implements the l1-rotation rotation criterion
 to identify and estimate the loadings matrix in factor models following
-[Freyaldenhoven
-(2025)](https://simonfreyaldenhoven.github.io/papers/factor_rotation.pdf).
+[Freyaldenhoven (2025)](https://doi.org/10.21799/frbp.wp.2020.25).
 
 ## Installation
 
@@ -27,7 +26,8 @@ devtools::install_github("SimonFreyaldenhoven/l1rotation")
 
 ## Usage
 
-Find a minimal example below. For more examples see the package
+Find a minimal example below. For more information see the package
+[website](https://kobleary.github.io/l1rotation/),
 [documentation](https://cran.r-project.org/package=l1rotation/l1rotation.pdf)
 and
 [vignette](https://cran.r-project.org/package=l1rotation/vignettes/documentation.html).
@@ -60,9 +60,8 @@ lf$rotated_plot
 ## Citation
 
 Simon Freyaldenhoven. “Identification Through Sparsity in Factor Models:
-the l1-rotation criterion.” [Working
-Paper](https://simonfreyaldenhoven.github.io/papers/factor_rotation.pdf),
-February 2025.
+the l1-rotation criterion.” [Philadelphia Fed Working Paper
+20-25](https://doi.org/10.21799/frbp.wp.2020.25), February 2025.
 
 Simon Freyaldenhoven, Ryan Kobler. “`l1rotation` package.” Code and data
 repository at <https://github.com/SimonFreyaldenhoven/l1rotation>, March

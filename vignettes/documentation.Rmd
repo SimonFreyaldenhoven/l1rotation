@@ -30,7 +30,7 @@ knitr::opts_chunk$set(
 library(l1rotation)
 ```
 
-The `l1rotation` package offers functionality to estimate the loadings matrix in factor models based on the l1-rotation criterion following [Freyaldenhoven (2025)](https://simonfreyaldenhoven.github.io/papers/factor_rotation.pdf). The key idea of this estimator is assuming a sparsity pattern in the loadings matrix solves the problem of rotational indeterminacy inherent to factor models. 
+The `l1rotation` package offers functionality to estimate the loadings matrix in factor models based on the l1-rotation criterion following [Freyaldenhoven (2025)](https://doi.org/10.21799/frbp.wp.2020.25). The key idea of this estimator is assuming a sparsity pattern in the loadings matrix solves the problem of rotational indeterminacy inherent to factor models. 
 
 Factor models take the form 
 
@@ -47,7 +47,7 @@ where
 
 - $e$ is a $T \times n$ error matrix.
 
-This package is designed to identify and estimate $\Lambda^{*}$ subject to additional sparsity assumptions detailed in [Freyaldenhoven (2025)](https://simonfreyaldenhoven.github.io/papers/factor_rotation.pdf).
+This package is designed to identify and estimate $\Lambda^{*}$ subject to additional sparsity assumptions detailed in [Freyaldenhoven (2025)](https://doi.org/10.21799/frbp.wp.2020.25).
 
 ## Quick start {#start}
 
