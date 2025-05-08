@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 ## Overview
 
-The `l1rotation` package implements the l1-rotation rotation criterion to identify and estimate the loadings matrix in factor models following [Freyaldenhoven (2025)](https://doi.org/10.21799/frbp.wp.2020.25).
+The `l1rotation` package implements the l1-rotation criterion of [Freyaldenhoven (2025)](https://doi.org/10.21799/frbp.wp.2020.25) to simplify the loading matrix in factor models.
 
 ## Installation
 
@@ -38,7 +38,6 @@ Find a minimal example below.
 For more information see the package [website](https://kobleary.github.io/l1rotation/), [documentation](https://cran.r-project.org/package=l1rotation/l1rotation.pdf) and [vignette](https://cran.r-project.org/package=l1rotation/vignettes/documentation.html).
 
 ```{r example}
-
 library(l1rotation)
 set.seed(916) 
 

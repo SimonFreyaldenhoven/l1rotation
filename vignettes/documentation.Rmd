@@ -1,5 +1,5 @@
 ---
-title: "Introduction to l1rotation"
+title: "Getting Started"
 output: 
   rmarkdown::html_vignette:
   toc: true
@@ -30,12 +30,12 @@ knitr::opts_chunk$set(
 library(l1rotation)
 ```
 
-The `l1rotation` package offers functionality to estimate the loadings matrix in factor models based on the l1-rotation criterion following [Freyaldenhoven (2025)](https://doi.org/10.21799/frbp.wp.2020.25). The key idea of this estimator is assuming a sparsity pattern in the loadings matrix solves the problem of rotational indeterminacy inherent to factor models. 
+The `l1rotation` package offers functionality to simplify the loading matrix in factor models. It can find the most sparse rotation of the loading matrix using the l1-rotation criterion of [Freyaldenhoven (2025)](https://doi.org/10.21799/frbp.wp.2020.25).  
 
-Factor models take the form 
+Under the assumption of sparsity in the true loading matrix, it also solves the problem of rotational indeterminacy inherent to factor models. That is, suppose the data follows a factor model:
 
 $$
-X = F \Lambda^{*T} + e
+X = F \Lambda^{*'} + e
 $$
 where 
 
@@ -47,11 +47,11 @@ where
 
 - $e$ is a $T \times n$ error matrix.
 
-This package is designed to identify and estimate $\Lambda^{*}$ subject to additional sparsity assumptions detailed in [Freyaldenhoven (2025)](https://doi.org/10.21799/frbp.wp.2020.25).
+Then, the assumption of sparsity in the loading matrix solves the problem of rotational indeterminacy inherent to factor models: $\Lambda^{*}$ will be the most sparse rotation and can be identified using the l1-rotation criterion [Freyaldenhoven (2025)](https://doi.org/10.21799/frbp.wp.2020.25).
 
 ## Quick start {#start}
 
-We will use the `example_data` data that ships with the package to show its basic functionality. This data is a matrix containing numeric information with $n = 224$, $T = 207$. In general, data.frames, tibbles, or other data types can also be used with `l1rotation` functions, as long as all columns are numeric. Note also that the package cannot handle missing values in the data matrix. 
+We will use the `example_data` data that ships with the package to show its basic functionality. This data is a matrix containing numeric information with $n = 224$, $T = 207$. In general, data.frames, tibbles, or other data types can also be used with `l1rotation` functions, as long as all columns are numeric. Note that the package cannot handle missing values in the data matrix. 
 
 To start, let's look at the first seven columns of the example data:
 
@@ -59,7 +59,9 @@ To start, let's look at the first seven columns of the example data:
 head(example_data[,1:7])
 ```
 
-We assume that the number of underlying factors can be learned from the data (following the procedure in [Bai and Ng (2002)](https://onlinelibrary.wiley.com/doi/epdf/10.1111/1468-0262.00273)). For the `example_data` we will use two factors. With just the data, $X$, and the number of factors, $r$, we can start estimating the loadings with `local_factors()`. This function estimates $\Lambda^{*}$ and provides helpful diagnostics and figures. 
+We assume that the number of underlying factors can be learned from the data (e.g., following the procedure in [Bai and Ng (2002)](https://onlinelibrary.wiley.com/doi/epdf/10.1111/1468-0262.00273) or [Ahn and Horenstein (2013)](https://onlinelibrary.wiley.com/doi/abs/10.3982/ECTA8968)). Note that this package does not include functionality to calculate the number of factors - we simply take the number of factors as a user input.
+
+For the `example_data` we will use two factors. With just the data, $X$, and the number of factors, $r$, we can start estimating the loadings with `local_factors()`. This function estimates $\Lambda^{*}$ and provides helpful diagnostics and figures.
 
 Below is an example using `example_data` (note that estimation can also be run in parallel with a selected number of cores, `n_cores`):
 
@@ -73,28 +75,27 @@ lf <- local_factors(
 
 ```
 
-In the estimation, `local_factors()` has reasonable defaults set so the only required arguments are the data you're decomposing and the number of factors. We use the principal components estimator as the initial estimate of the loadings, $\Lambda_0$, which can be accessed via the `Lambda0` item of the output. The function also computes a quick diagnostic to check whether local factors are present in the data which is given in the output item `has_local_factors`.
+In the estimation, the only required arguments for `local_factors()` are the data to be decomposed and the number of factors. We use the principal components estimator as the initial estimate of the loadings, $\Lambda^0$, which can be accessed via the `initial_loadings` item of the output. The function also computes a quick diagnostic to check whether local factors are present in the data which is given in the output item `has_local_factors`.
 
-Additionally, there are several rotation diagnostics accessible via `rotation_diagnostics` which give the rotation matrix, $R$ that when multiplied by $\Lambda_0$ produces $\hat{\Lambda}^*$, the value of the l1 norm for each vector, and the frequency that each solution appears in the initial grid of estimates.
+Additionally, there are several rotation diagnostics accessible via `rotation_diagnostics`: (1) The rotation matrix, $R$, that when multiplied by $\Lambda^0$ produces $\hat{\Lambda}^*$, (2) the value of the l1 norm for each vector, and (3) the frequency with which the minimization problem converges at each of the estimated loading vectors.
 
 ```{r}
 lf$rotation_diagnostics
 ```
-For a visual interpretation of this rotation, we provide tile plots contrasting the initial estimate $\Lambda_0$, `pc_plot` and the rotated estimate, $\hat{\Lambda}^*$, `rotated_plot`.
+For a visual interpretation of this rotation, we provide tile plots contrasting the initial estimate $\Lambda^0$, `pc_plot` and the rotated estimate, $\hat{\Lambda}^*$, `rotated_plot`.
 
 ```{r}
 lf$pc_plot
 ```
 
-In the initial principal component estimate, recall that each factor is simply a principal component. Of the 207 variables in $X$, the first factor loads negatively along the variables between 90 and 120, and slightly negatively almost everywhere else. Along the second factor, there are positive loadings between variables 125 and 200 and slightly negative loadings elsewhere. However, it may be difficult to interpret the relationship between variables and factors when all loadings are nonzero. 
+In the initial principal component estimate, recall that each factor is simply a principal component. Of the 207 variables in $X$, the first factor loads most negatively along the variables between 90 and 120, and slightly negatively almost everywhere else. Along the second factor, there are positive loadings between variables 122 and 207 and slightly negative loadings elsewhere. However, it may be difficult to interpret the relationship between variables and factors when all loadings are nonzero.
 
 ```{r}
 lf$rotated_plot
 ```
 
 
-The second estimate is a rotated version of the principal components estimator optimized for sparsity. It will rotate each vector of the principal components loadings matrix until it finds a set of factors that are as sparse as possible. As we can see, the second plot may provide a stronger interpretation as variables 90-200 load negatively on the first factor while variables 0-120 load negatively on the second factor. The loadings along the other variables are close to zero, suggesting no relationship. With this rotation, we can more easily identify which sets of variables are related to which latent factors due to the revealed sparsity pattern.
-
+The second estimate is a rotated version of the loading matrix optimized for sparsity using the l1-rotation criterion. This estimate is easier to interpret as most variables between 90-207 load negatively on the first factor, variables 0-120 load negatively on the second factor, and all other loadings are close to zero.
 
 ## Refining the details {#details}
 
@@ -103,23 +104,19 @@ The second estimate is a rotated version of the principal components estimator o
 
 ### `find_local_factors()` {#flf}
 
-This function has an additional argument, `Lambda0`, that allows the user to specify any orthonormal basis of the loadings rather than defaulting to the principal component estimator.  Here are some plausible alternative initial estimates:
-
-- MLE estimation
-
-- Sparse Orthogonal Factor Regression (SOFAR) as in [Uematsu et al. (2019)](http://faculty.marshall.usc.edu/yingying-fan/publications/IEEEIT-UFCLL19.pdf).
+This function takes the same inputs as `local_factors()`, `X` and `r`, and has an additional argument, `initial_loadings`, that allows the user to specify any orthonormal basis of the loadings rather than defaulting to the principal component estimator.  Alternative initial estimates may include Maximum Likelihood based estimation
+or Sparse Orthogonal Factor Regression ([Uematsu et al. (2019)](http://faculty.marshall.usc.edu/yingying-fan/publications/IEEEIT-UFCLL19.pdf)), for example.
 
 ### `test_local_factors()` {#tlf}
 
+This function tests for the presence of local factors given a sparse basis of the loading space. It takes as input `X` and `r`, and an additional optional argument, `loadings`, that allows the user to specify the loading matrix that is to be tested. This argument is set to `NULL` by default, which estimates $\hat{\Lambda}^*$ (by maximizing the l1-rotation criterion) and tests it for local factors. 
 
-This function tests for the presence of local factors given an estimate of the loadings matrix, `Lambda`. Since the results in this package rely upon a sparsity pattern in the true loadings matrix, `test_local_factors()` provides a simple diagnostic to check this assumption. 
-
-For a given loading matrix estimate, $\hat{\Lambda}$, we can consider maximizing across factors the number of individual loadings in $\hat{\Lambda}$ smaller than some threshold $h_n$. This gives us an idea of how many "small" loadings there are in $\hat{\Lambda}$: 
+To construct this diagnostic for a given loading matrix estimate, $\hat{\Lambda}$, we find the column with the largest number of entries smaller than some threshold $h_n$:
 
 $$
 \mathcal{L(\hat{\Lambda})} = \max_k\left(\sum_{i=1}^n 1\{\hat{|\lambda}_{ik}| < h_n \}\right)
 $$
-With this number, we can then check whether the number of "small" loadings is larger than $\gamma n$
+We can then check whether the number of these "small" loadings is larger than $\gamma n$
 
 $$
 \texttt{has_local_factors} = 1\{\mathcal{L}(\hat{\Lambda})  \geq \gamma n \}.
@@ -131,7 +128,7 @@ Returning to our `lf` results, we can take a look at the value of `has_local_fac
 lf$has_local_factors
 ```
 
-This value is the result of `test_local_factors()`. To verify, we can call `test_local_factors()` on two different estimates: the principal components estimate, `Lambda0`, and the l1rotation estimate, `Lambda`. 
+This value is the result of `test_local_factors()`. To verify, we can call `test_local_factors()` on two different estimates: the principal components estimate, `initial_loadings`, and the l1rotation estimate, `rotated_loadings`.
 
 ```{r}
 # Check for local factors in PC estimate...
@@ -144,10 +141,7 @@ test_pc_estimate$has_local_factors
 test_rot_estimate$has_local_factors
 ```
 
-This confirms that no local factors are detected in the principal components estimate (no sparsity pattern is observed), and that local factors are present in the rotated estimate. 
-
-* Note that rotating the initial estimate, optimizing for sparsity, is not guaranteed to produce a sparse loadings matrix if the true loadings matrix itself is not sparse. However, if a sparsity pattern does exist in the true loadings matrix, this procedure will recover it.
-
+Thus, no local factors are detected using the principal components estimate, while the rotated estimate reveals two local factors. We can also visualize the number of small loadings using the `small_loadings_plot` element in our `lf' results:
 
 ```{r}
 round_hn <- round(test_rot_estimate$h_n, digits = 3)
@@ -159,5 +153,4 @@ lf$small_loadings_plot +
   )
 ```
 
-Finally, given the testing plot above, we can conclude that factors 1 and 2 are likely local since they have enough "small" loadings (i.e., smaller than a value of $h_n = 1/\log(n) =$ `r round_hn` in the `example_data`).
 
