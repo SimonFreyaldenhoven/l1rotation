@@ -3,7 +3,7 @@
 \docType{data}
 \name{example_data}
 \alias{example_data}
-\title{Example data with four factors from the replication files of Freyaldenhoven et. al (2023).}
+\title{Example data with two factors from the replication files of \href{https://doi.org/10.21799/frbp.wp.2020.25}{Freyaldenhoven et. al (2025)}.}
 \format{
 \subsection{\code{example_data}}{
 
@@ -17,6 +17,6 @@ Dataset available as a .mat file can be found under local_factors.zip \url{https
 example_data
 }
 \description{
-Example data with four factors from the replication files of Freyaldenhoven et. al (2023).
+Example data with two factors from the replication files of \href{https://doi.org/10.21799/frbp.wp.2020.25}{Freyaldenhoven et. al (2025)}.
 }
 \keyword{datasets}
