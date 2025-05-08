@@ -1,7 +1,0 @@
-url: ~
-template:
-  bootstrap: 5
-  bootswatch: cosmo
-  math-rendering: mathjax
-  light-switch: true
-
