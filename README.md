@@ -36,7 +36,7 @@ and
 library(l1rotation)
 set.seed(916) 
 
-# Minimal example with 4 factors, where X is a 224 by 207 matrix
+# Minimal example with 2 factors, where X is a 224 by 207 matrix
 lf <- local_factors(X = example_data, r = 2)
 
 # Rerun with parallel processing
