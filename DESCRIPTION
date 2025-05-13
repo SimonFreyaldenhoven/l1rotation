@@ -1,6 +1,6 @@
 Package: l1rotation
 Title: Identify Loading Vectors under Sparsity in Factor Models
-Version: 0.0.1
+Version: 1.0.0
 Authors@R: c(
     person("Simon", "Freyaldenhoven", , "simon.freyaldenhoven@phil.frb.org", role = c("aut", "cph")),
     person("Ryan", "Kobler", , "kobleary@gmail.com", role = c("aut", "cre"))
