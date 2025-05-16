@@ -6,7 +6,7 @@
 \alias{l1rotation-package}
 \title{l1rotation: Identify Loading Vectors under Sparsity in Factor Models}
 \description{
-Simplify the loading matrix in factor models using the l1 criterion as proposed in Freyaldenhoven (2025) \url{https://doi.org/10.21799/frbp.wp.2020.25}. Given a data matrix, find the rotation of the loading matrix with the smallest l1-norm and/or test for the presence of local factors with with main function \code{\link{local_factors}}.
+Simplify the loading matrix in factor models using the l1 criterion as proposed in Freyaldenhoven (2025) \doi{10.21799/frbp.wp.2020.25}. Given a data matrix, find the rotation of the loading matrix with the smallest l1-norm and/or test for the presence of local factors with main function \code{\link{local_factors}}.
 }
 \seealso{
 Useful links:
