@@ -5,7 +5,7 @@ Authors@R: c(
     person("Simon", "Freyaldenhoven", , "simon.freyaldenhoven@phil.frb.org", role = c("aut", "cph")),
     person("Ryan", "Kobler", , "kobleary@gmail.com", role = c("aut", "cre"))
   )
-Description: Simplify the loading matrix in factor models using the l1 criterion as proposed in Freyaldenhoven (2025) <https://doi.org/10.21799/frbp.wp.2020.25>. Given a data matrix, find the rotation of the loading matrix with the smallest l1-norm and/or test for the presence of local factors with with main function local_factors().
+Description: Simplify the loading matrix in factor models using the l1 criterion as proposed in Freyaldenhoven (2025) <doi:10.21799/frbp.wp.2020.25>. Given a data matrix, find the rotation of the loading matrix with the smallest l1-norm and/or test for the presence of local factors with main function local_factors().
 License: MIT + file LICENSE
 Depends: 
     R (>= 3.5)
