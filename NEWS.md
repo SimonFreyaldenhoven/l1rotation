@@ -1,5 +1,10 @@
 # l1rotation (development version)
 
+# l1rotation v1.0.1
+
+* Fixes citation and typos
+* Replaces calls to `print` with `message`
+
 # l1rotation v1.0.0
 
 * Initial CRAN submission.
