@@ -179,7 +179,7 @@ fill_with_pc <- function(consolidated_mins, initial_loadings, X, factorno){
   eig_x <- diag(t(temp_F) %*% temp_F) * (n/t)
 
   while (candidateno < factorno) {
-    print("Supplementing with PCs...")
+    message("Supplementing with PCs...")
     min_eig <- rep(0, factorno)
     for (ell in 1:factorno) {
       temp <- cbind(rotated_loadings, initial_loadings[, ell])
@@ -188,7 +188,7 @@ fill_with_pc <- function(consolidated_mins, initial_loadings, X, factorno){
     index <- which.max(min_eig * sqrt(eig_x[1:factorno]))
     rotated_loadings <- cbind(rotated_loadings, initial_loadings[, index])
     R <- cbind(R, I[, index])
-    print(paste("PC used:", index))
+    message(paste("PC used:", index))
     l1_norm_update <- c(l1_norm_update, sum(abs(initial_loadings[, index])))
 
     candidateno <- ncol(rotated_loadings)
