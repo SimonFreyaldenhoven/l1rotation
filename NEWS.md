@@ -1,4 +1,6 @@
-# l1rotation (development version)
+# l1rotation v1.0.2
+
+* Updates internal function collate_solutions() to align with paper resubmission (when fewer local minima are found than expected, emphasize supplementing with leading PCs)
 
 # l1rotation v1.0.1
 

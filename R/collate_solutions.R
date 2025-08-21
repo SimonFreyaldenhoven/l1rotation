@@ -185,7 +185,7 @@ fill_with_pc <- function(consolidated_mins, initial_loadings, X, factorno){
       temp <- cbind(rotated_loadings, initial_loadings[, ell])
       min_eig[ell] <- min(eigen(t(temp) %*% temp)$values)
     }
-    index <- which.max(min_eig * sqrt(eig_x[1:factorno]))
+    index <- which.max(min_eig * eig_x[1:factorno])
     rotated_loadings <- cbind(rotated_loadings, initial_loadings[, index])
     R <- cbind(R, I[, index])
     message(paste("PC used:", index))
